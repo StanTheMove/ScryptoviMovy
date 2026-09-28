@@ -1,21 +1,34 @@
-﻿import sys
-import random
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
-'../../')))
-from shared.student import STUDENT_NAME, GROUP_NAME, VARIANT_NUMBER
+import random
+import sys
 
-PASSWORDS = ["NetworkS3c!", "easy", "Firewa11@Pass", "anonymous",
-"Intrus10n#Detect", "sample", "Malwar3@Scan", "qwerty", "Vulnerab1l!ty",
-"common"]
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+from shared.student import STUDENT_NAME, VARIANT_NUMBER
 
-CRITERIA = {"min_length": 9, "require_digits": True, "require_upper": True,
-"require_special": True}
+PASSWORDS = [
+    "NetworkS3c!",
+    "easy",
+    "Firewa11@Pass",
+    "anonymous",
+    "Intrus10n#Detect",
+    "sample",
+    "Malwar3@Scan",
+    "qwerty",
+    "Vulnerab1l!ty",
+    "common",
+]
 
-FORBIDDEN_PASSWORDS = {"easy", "anonymous", "sample", "qwerty", "common",
-"password"}
+CRITERIA = {
+    "min_length": 9,
+    "require_digits": True,
+    "require_upper": True,
+    "require_special": True,
+}
+
+FORBIDDEN_PASSWORDS = {"easy", "anonymous", "sample", "qwerty", "common", "password"}
 
 SPECIAL_CHARS = set("!@#$%^&*()-_=+[]{}|;:,.<>?/")
+
 
 def evaluate_password(password: str, full_list: list[str]) -> str:
     min_len = CRITERIA["min_length"]
@@ -43,6 +56,7 @@ def evaluate_password(password: str, full_list: list[str]) -> str:
 
     return "Слабкий"
 
+
 def run_task1() -> None:
     print("=" * 60)
     print(f"Завдання 1 | Студент: {STUDENT_NAME} | Варіант: {VARIANT_NUMBER}")
@@ -60,6 +74,7 @@ def run_task1() -> None:
     for i, pwd in enumerate(work_passwords, start=1):
         status = evaluate_password(pwd, work_passwords)
         print(f"{i:<4} | {pwd:<20} | {status:<15}")
+
 
 if __name__ == "__main__":
     run_task1()

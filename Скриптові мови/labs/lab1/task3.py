@@ -1,4 +1,4 @@
-﻿import csv
+import csv
 import datetime
 import functools
 import hashlib
@@ -15,8 +15,10 @@ LOG_JSON = DATA_DIR / "log.json"
 
 MIN_PASSWORD_LENGTH = 15
 
+
 class ValidationError(Exception):
     pass
+
 
 def generate_hash(password: str, salt: str = "00000") -> str:
     if not password or not salt:
@@ -34,7 +36,7 @@ def generate_hash(password: str, salt: str = "00000") -> str:
 def log_event(func):
     @functools.wraps(func)
     def wrapper(username: str, password: str, *args, **kwargs):
-        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.datetime.now(datetime.timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S")
         res_status = "failure"
         try:
             success = func(username, password, *args, **kwargs)
@@ -55,7 +57,7 @@ def log_event(func):
                 try:
                     with open(LOG_JSON, "r", encoding="utf-8") as f:
                         logs = json.load(f)
-                except (json.JSONDecodeError, IOError):
+                except (OSError, json.JSONDecodeError):
                     logs = []
 
             logs.append(log_entry)
@@ -63,6 +65,7 @@ def log_event(func):
                 json.dump(logs, f, indent=4, ensure_ascii=False)
 
     return wrapper
+
 
 def create_user(username: str, password: str, salt: str) -> tuple[str, str]:
     return username, generate_hash(password, salt)
@@ -88,8 +91,7 @@ def read_users_db() -> list[dict[str, str]]:
     users = []
     with open(USERS_CSV, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        for row in reader:
-            users.append(row)
+        return list(reader)
     return users
 
 
@@ -104,6 +106,7 @@ def login(username: str, password: str, salt: str) -> bool:
             computed_hash = generate_hash(password, salt)
             return computed_hash == record["password_hash"]
     return False
+
 
 def run_task3() -> None:
     print("=" * 60)
@@ -135,7 +138,7 @@ def run_task3() -> None:
         print("-" * 50)
         for rec in db:
             print(f"{rec['username']:<15} | {rec['password_hash'][:25]}...")
-    except (FileNotFoundError, PermissionError, IOError) as e:
+    except (OSError, FileNotFoundError, PermissionError) as e:
         print(f"[Помилка читання БД]: {e}")
 
     print("\n[*] Тестування автентифікації та логування:")
@@ -150,7 +153,7 @@ def run_task3() -> None:
             res = login(u, p, salt)
             status = "Вхід успішний" if res else "Помилка автентифікації"
             print(f" - Вхід користувача '{u}': {status}")
-        except (ValueError, ValidationError, IOError) as err:
+        except (OSError, ValueError, ValidationError) as err:
             print(f" - [Помилка для '{u}']: {err}")
 
     if LOG_JSON.exists():
