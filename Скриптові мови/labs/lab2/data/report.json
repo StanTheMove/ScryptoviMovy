@@ -1,0 +1,58 @@
+{
+  "total_records": 29,
+  "off_hours_count": 5,
+  "off_hours_alerts": [
+    {
+      "user_id": "u002",
+      "action": "DOWNLOAD",
+      "resource": "/finance/payroll.csv",
+      "ip": "10.0.1.20",
+      "timestamp": "2026-09-21T23:40:00",
+      "reason": "Night"
+    },
+    {
+      "user_id": "u003",
+      "action": "READ",
+      "resource": "/prod/secrets",
+      "ip": "10.0.1.30",
+      "timestamp": "2026-09-22T05:20:00",
+      "reason": "Night"
+    },
+    {
+      "user_id": "u005",
+      "action": "DOWNLOAD",
+      "resource": "/finance/budget.xlsx",
+      "ip": "10.0.1.50",
+      "timestamp": "2026-09-24T22:05:00",
+      "reason": "Night"
+    },
+    {
+      "user_id": "u001",
+      "action": "READ",
+      "resource": "/docs/weekend.txt",
+      "ip": "10.0.1.10",
+      "timestamp": "2026-09-26T10:00:00",
+      "reason": "Weekend"
+    },
+    {
+      "user_id": "u003",
+      "action": "DELETE",
+      "resource": "/tmp/report.csv",
+      "ip": "10.0.1.30",
+      "timestamp": "2026-09-27T13:00:00",
+      "reason": "Weekend"
+    }
+  ],
+  "critical_access_anomalies": [
+    {
+      "user_id": "u007",
+      "actions_count": 18,
+      "ip": "10.0.1.77",
+      "targeted_resources": [
+        "/admin/users",
+        "/prod/secrets",
+        "/finance/payroll.csv"
+      ]
+    }
+  ]
+}
