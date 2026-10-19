@@ -28,5 +28,65 @@
             "unknown_hacker"
         ],
         "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "admin_sec",
+        "result": "success",
+        "timestamp": "2026-10-05 12:19:03",
+        "args": [
+            "admin_sec"
+        ],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "analyst_01",
+        "result": "failure",
+        "timestamp": "2026-10-05 12:19:03",
+        "args": [
+            "analyst_01"
+        ],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "unknown_hacker",
+        "result": "failure",
+        "timestamp": "2026-10-05 12:19:03",
+        "args": [
+            "unknown_hacker"
+        ],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "admin_sec",
+        "result": "success",
+        "timestamp": "2026-10-19 10:20:52",
+        "args": [
+            "admin_sec"
+        ],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "analyst_01",
+        "result": "failure",
+        "timestamp": "2026-10-19 10:20:52",
+        "args": [
+            "analyst_01"
+        ],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "unknown_hacker",
+        "result": "failure",
+        "timestamp": "2026-10-19 10:20:52",
+        "args": [
+            "unknown_hacker"
+        ],
+        "kwargs": {}
     }
 ]

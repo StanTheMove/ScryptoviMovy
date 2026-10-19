@@ -36,7 +36,11 @@ def generate_hash(password: str, salt: str = "00000") -> str:
 def log_event(func):
     @functools.wraps(func)
     def wrapper(username: str, password: str, *args, **kwargs):
-        now = datetime.datetime.now(datetime.timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S")
+        now = (
+            datetime.datetime.now(datetime.timezone.utc)
+            .astimezone()
+            .strftime("%Y-%m-%d %H:%M:%S")
+        )
         res_status = "failure"
         try:
             success = func(username, password, *args, **kwargs)
